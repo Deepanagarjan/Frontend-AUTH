@@ -1,9 +1,14 @@
-// import React from 'react';
+import React from 'react';
 
 const Footer = () => {
     return (
         <div>
-            <h1>Footer</h1>
+         <footer className="footer-section">
+  <p className="text-center  py-5 mb-0 fw-bold ">
+    © 2024 Culineries Hub. All rights reserved
+  </p>
+</footer>
+
         </div>
     );
 };

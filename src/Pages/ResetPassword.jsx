@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 
 const ResetPassword = () => {
@@ -13,7 +13,7 @@ const ResetPassword = () => {
  const handleSubmit=async(e)=>{
     e.preventDefault()
     try {
-        const response = await axios.post(`http://localhost:5000/api/user/reset-password/${id}/${token}`,{password})
+        const response = await axios.post(`http://localhost:3000/api/user/reset-password/${id}/${token}`,{password})
 
         navigate("/login")
     }
@@ -34,7 +34,9 @@ const ResetPassword = () => {
                          <input type="password" name="password"  className="form-control rounded-0" id="password" placeholder='enter your password'   onChange={(e)=>setPassword(e.target.value)}/>
                      </div>
                      <button type="submit" className="btn btn-success w-100 rounded-0">Update</button>
+                    
                  </form>
+                 <ToastContainer/>
             </div>
             
         </div>

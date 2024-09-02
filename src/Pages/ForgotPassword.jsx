@@ -1,8 +1,9 @@
 import axios from 'axios';
+
 import  { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import {  toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const ForgotPassword = () => {
   const [email,setEmail] = useState()
@@ -11,7 +12,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-        const response=await axios.post("http://localhost:5000/api/user/forgot-password",{email})
+        const response=await axios.post("http://localhost:3000/api/user/forgot-password",{email})
         if(response.data.status===200){
             toast.success(response.data.message)
             navigate("/login")
@@ -22,3 +23,4 @@ const ForgotPassword = () => {
     }
   }
 }
+export default ForgotPassword;

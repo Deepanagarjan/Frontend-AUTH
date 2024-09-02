@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import {  toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 const Profile = ({ token }) => {
   const [resdata, setResData] = useState([]);
  
@@ -10,7 +10,7 @@ const Profile = ({ token }) => {
   }, []);
   const fetchData = async () => {
     await axios
-      .get("http://localhost:5000/api/user/get-user", {
+      .get("http://localhost:3000/api/user/get-user", {
         headers: {
           'Content-Type':"application/json",
           'Authorization': `Bearer ${token}`

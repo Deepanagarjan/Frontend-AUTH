@@ -1,8 +1,8 @@
 import axios from "axios";
 import  { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 
 const Register = () => {
@@ -15,7 +15,7 @@ const Register = () => {
     e.preventDefault();
     const payload = { username, email, password,role };
     await axios
-      .post("http://localhost:5000/api/user/register-user", payload)
+      .post("http://localhost:3000/api/user/register-user", payload)
       .then((res) => {
         toast.success(res.data.message)
         navigate("/login")
@@ -96,8 +96,11 @@ const Register = () => {
       <button><Link to='/'>Back</Link></button>
           <br />
       <button><Link to='/login'>Login</Link></button>
+      <ToastContainer/>
     </div>
+    
   );
+  
 };
 
 export default Register;

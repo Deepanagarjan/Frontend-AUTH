@@ -1,36 +1,32 @@
 import axios from "axios";
-import  { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Login = ({ setToken }) => {
+const Login = ({ settoken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
- 
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = { email, password };
     await axios
-      .post("http://localhost:5000/api/user/login-user", payload)
+      .post("http://localhost:3000/api/user/login-user", payload)
       .then((res) => {
-       toast.success(res.data.message);
+        toast.success(res.data.message);
         setToken(res.data.token);
-        navigate("/profile")
-})
+        navigate("/profile");
+      })
 
       .catch((error) => {
         console.log(error);
         toast.error(error.response.data.message);
       });
 
-    setEmail('')
-    setPassword('')
-    
-
-
-  
+    setEmail("");
+    setPassword("");
   };
   return (
     <div>
@@ -74,6 +70,7 @@ const Login = ({ setToken }) => {
       <button>
         <Link to="/forgot-password">Forgot Password?</Link>
       </button>
+      <ToastContainer />
     </div>
   );
 };
