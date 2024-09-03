@@ -1,47 +1,61 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {  toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Profile = ({ token }) => {
-  const [resdata, setResData] = useState([]);
- 
+  const [userData, setUserData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     fetchData();
   }, []);
+
   const fetchData = async () => {
-    await axios
-      .get("http://localhost:3000/api/user/get-user", {
-        headers: {
-          'Content-Type':"application/json",
-          'Authorization': `Bearer ${token}`
-        },
-      })
-      .then((res) => {
-        setResData(res.data.data);
-        toast.success(res.data.message);
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error(err.response.data.message);
-      });
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/user/get-user",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setUserData(response.data.data);
+      toast.success(response.data.message);
+    } catch (error) {
+      console.error(error);
+      toast.error(error.response?.data?.message || "An error occurred");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>
-      {resdata.map((ele, index) => {
-        return (
-          <div key={index}>
-            <div className="col">
-              <div className="card px-3 py-4 shadow-sm">
-                <div className="card-header">{ele.username}</div>
-                <div className="card-body">
-                  <h5 className="card-title">{ele.email}</h5>
-                  <h5 className="card-title">{ele.role}</h5>
-                </div>
+    <div className="container">
+      {userData.length > 0 ? (
+        userData.map((user, index) => (
+          <div key={index} className="col mb-3">
+            <div className="card px-3 py-4 shadow-sm">
+              <div className="card-header">
+                <strong>{user.username}</strong>
+              </div>
+              <div className="card-body">
+                <h5 className="card-title">{user.email}</h5>
+                <p className="card-text">Role: {user.role}</p>
               </div>
             </div>
           </div>
-        );
-      })}
+        ))
+      ) : (
+        <div>No user data found.</div>
+      )}
+      <ToastContainer />
     </div>
   );
 };

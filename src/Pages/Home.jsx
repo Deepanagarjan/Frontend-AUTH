@@ -1,12 +1,13 @@
-import React from "react";
+// import React from "react";
 import Navbar from "../Components/Navbar";
 import { Link } from "react-router-dom";
 import Footer from "../Components/Footer";
-
+import LandingPage from "../Pages/LandingPage";
 const Home = () => {
   return (
     <div>
       <Navbar />
+      
       <header>
         <section className="hero-section">
           <div className="container">
@@ -40,6 +41,8 @@ const Home = () => {
           </div>
         </section>
       </header>
+
+      <LandingPage />
       <Footer />
     </div>
   );

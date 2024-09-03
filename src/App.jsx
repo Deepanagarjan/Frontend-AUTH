@@ -4,7 +4,7 @@ import Register from './Pages/Register';
 import Home from './Pages/Home';
 import Login from './Pages/Login ';
 import Profile from './Pages/Profile';
-
+import PasswordResetConfirm from './Pages/PasswordResetConfirm';
 import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
 const App = () => {
@@ -19,6 +19,7 @@ const App = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login setToken={setToken} />} />
         <Route path ='/profile' element ={<Profile token = {token}/>} />
+        <Route path="/password-reset-confirm" element={<PasswordResetConfirm />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password/:id/:token' element={<ResetPassword />} />
       </Routes>

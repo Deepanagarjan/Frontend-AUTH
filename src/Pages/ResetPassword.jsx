@@ -11,18 +11,25 @@ const ResetPassword = () => {
    const {id,token}=useParams()
 
  const handleSubmit=async(e)=>{
-    e.preventDefault()
+    e.preventDefault();
+    if (!password) {
+        toast.error("Password cannot be empty");
+        return;
+      }
     try {
         const response = await axios.post(`http://localhost:3000/api/user/reset-password/${id}/${token}`,{password})
 
-        navigate("/login")
-    }
+        toast.success("Password updated successfully");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000); // Redirects after 2 seconds
+    }    
      catch (error) {
         console.log(error);
         toast.error(error.response.data.message)
     }
-    
- }
+   setPassword("") ;
+ };
 
     return (
        <div className='d-flex justify-content-center align-items-center bg-gradient'>
@@ -31,6 +38,11 @@ const ResetPassword = () => {
                  <form onSubmit={handleSubmit}>
                      <div className="mb-3">
                          <label htmlFor="password" className="form-label"><strong>New Password</strong></label>
+                         <input type="password" name="password"  className="form-control rounded-0" id="password" placeholder='enter your password'   onChange={(e)=>setPassword(e.target.value)}/>
+                     </div>
+
+                     <div className="mb-3">
+                         <label htmlFor="password" className="form-label"><strong>Confirm Password</strong></label>
                          <input type="password" name="password"  className="form-control rounded-0" id="password" placeholder='enter your password'   onChange={(e)=>setPassword(e.target.value)}/>
                      </div>
                      <button type="submit" className="btn btn-success w-100 rounded-0">Update</button>
