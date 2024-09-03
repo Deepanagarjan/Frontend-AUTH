@@ -5,7 +5,7 @@ const Footer = () => {
         <div>
          <footer className="footer-section">
   <p className="text-center  py-5 mb-0 fw-bold ">
-    © 2024 Culineries Hub. All rights reserved
+    © 2024 Culineries Hub. All rights reserved by Deepa
   </p>
 </footer>
 
